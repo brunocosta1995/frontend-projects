@@ -1,5 +1,9 @@
 import React, {useState} from "react";
+import {fetchQuizQuestions} from "./API";
+//Components
 import QuestionCard from "./Components/QuestionCard";
+//types
+import { Difficulty } from "./API";
 
 const TOTAL_QUESTIONS = 10;
 
@@ -18,6 +22,10 @@ function App() {
 
   function nextQuestion() {}
 
+  
+
+  console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.MEDIUM));
+
   return (
     <div className="App">
       <h1>React Quiz App</h1>
@@ -26,14 +34,14 @@ function App() {
       </button>
       <p className="score">Score: </p>
       <p>Loading Next Question...</p>
-      <QuestionCard
+      {/* <QuestionCard
         questionNumber={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answers}
         callback={checkAnswer}
         userAnswer={userAnswers ? userAnswers[number] : undefined}
-      />
+      /> */}
       <button className="next" onClick={nextQuestion}>
         Next Question
       </button>
