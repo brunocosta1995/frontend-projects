@@ -1,7 +1,4 @@
 import { shuffleArray } from "./utils";
-{
-  /* https://opentdb.com/api.php?amount=10 */
-}
 
 
 export enum Difficulty {
@@ -17,15 +14,13 @@ export type Question = {
   question: string;
   correct_answer: string;
   incorrect_answers: string[];
+  answers: string[];
 };
-
-//adicionando mais um type junto com o type Question criado.
-export type QuestionState = Question & { answers: string[] };
 
 export async function fetchQuizQuestions(
   amount: number,
   difficulty: Difficulty
-): Promise<Question[] | null> {
+): Promise<Question[]> {
   const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
   try {
     const response = await fetch(endpoint);
