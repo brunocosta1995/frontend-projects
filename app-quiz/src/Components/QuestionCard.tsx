@@ -1,5 +1,7 @@
+import {Wrapper, ButtonWrapper} from "./QuestionCard.styles";
 import React from "react";
 import { AnswerObject } from "../App";
+//styles
 
 type Props = {
   question: string;
@@ -19,7 +21,8 @@ function QuestionCard({
   totalQuestions,
 }: Props) {
   return (
-    <div>
+    
+    <Wrapper>
       <p className="number">
         Question: {questionNumber} / {totalQuestions}
       </p>
@@ -27,15 +30,24 @@ function QuestionCard({
       <div>
         {answers.map((answer) => {
           return (
-            <div key={answer}>
-              <button disabled={Boolean(userAnswer)} value={answer} onClick={callback}>
+            <ButtonWrapper
+              key={answer}
+              correct={userAnswer?.correctAnswer === answer}
+             userClicked={userAnswer?.answer === answer}
+            >
+              <button
+                disabled={Boolean(userAnswer)}
+                value={answer}
+                onClick={callback}
+              >
                 <span dangerouslySetInnerHTML={{ __html: answer }}></span>
               </button>
-            </div>
+            </ButtonWrapper>
           );
         })}
       </div>
-    </div>
+    </Wrapper>
+    
   );
 }
 
