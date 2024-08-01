@@ -16,14 +16,11 @@ function Cart({
   removeFromCart,
 }: Props): React.ReactElement {
 
-  function calculateTotal(items: CartItemType[]) {
-    return (
-    items.reduce((acu: number, item) => {
-        return (acu + item.amount * item.price)
-    }, 0)
-)
     
-
+  function calculateTotal(items: CartItemType[]) {
+    return items.reduce((acu: number, item) => {
+      return acu + item.amount * item.price;
+    }, 0);
   }
 
   return (
