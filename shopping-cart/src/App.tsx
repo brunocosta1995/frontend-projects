@@ -59,16 +59,27 @@ function App() {
       if (checkItem) {
         return prevValue.map((item) =>
           item.id === clickedItem.id
-            ? { ...item, amout: item.amount + 1 }
+            ? { ...item, amount: item.amount + 1 }
             : item
         );
       }
       //Add the item if i'ts not added to the cart
-      return [...prevValue, {...clickedItem, amount: 1}];
+      return [...prevValue, { ...clickedItem, amount: 1 }];
     });
   }
 
-  function handleRemoveFromCart() {}
+  function handleRemoveFromCart(idItem: number) {
+    setCartItems((prevValue) => {
+      return prevValue.reduce((acu, item) => {
+        if (item.id === idItem) {
+          if (item.amount === 1) return acu;
+          return [...acu, {...item, amount: item.amount - 1}]
+        } else {
+          return [...acu, item];
+        }
+      }, [] as CartItemType[])
+    })
+  }
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong...</div>;
